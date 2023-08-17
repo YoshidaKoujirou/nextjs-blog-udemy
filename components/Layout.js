@@ -3,7 +3,7 @@ import styles from "./layout.module.css"
 import utilStyles from "../styles/utils.module.css"
 import Link from "next/link";
 
-const name = "Yoshida Koujirou"
+const name = "TEST BLOG"
 export const siteTitle = "Next.js blog"
 
 function Layout({ children ,home}) {
@@ -23,7 +23,7 @@ function Layout({ children ,home}) {
                     </>
                 )}
 
-                <h1 className={utilStyles.heading2Xl}>{name}</h1>
+                <h1 className={utilStyles.heading2Xl}>{name}</>
             </header>
             <main>
                 {children}
