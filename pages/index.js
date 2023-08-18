@@ -6,6 +6,8 @@ import Layout,{siteTitle} from '@/components/Layout'
 import utilStyle from "../styles/utils.module.css"
 import Link from 'next/link'
 import {getPostsData} from '../lib/post'
+import lottie from 'lottie-web'
+import {createRef, useEffect } from 'react'
 
 //SSGの場合
 export async function getStaticProps(){
@@ -18,6 +20,22 @@ export async function getStaticProps(){
 }
 
 export default function Home({ allPostsData }) {
+
+  let animationContainer = createRef();
+
+  useEffect(() => {
+    const anim = lottie.loadAnimation({
+      container: animationContainer.current,
+      renderer: "svg",
+      loop:true,
+      autoplay:true,
+      path:"/animations/data.json"
+
+    })
+
+    return ()=> anim.destroy();
+  },[])
+
   return(
     <Layout home>
       <Head>
@@ -26,7 +44,7 @@ export default function Home({ allPostsData }) {
         </title>
       </Head>
       <section>
-        <p className={utilStyle.headingMd}>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+        <p className={utilStyle.headingMd}>Next.js、Lottieなどなど学習用制作物</p>
       </section>
 
       <section className={`${utilStyle.headingMd} ${utilStyle.padding1px}`}>
@@ -35,9 +53,13 @@ export default function Home({ allPostsData }) {
           {allPostsData.map(({ id, title, date,thumbnail } ) => (
             <article key={id}>
               <Link href={`/posts/${id}`}> 
-                <img 
-                  src={`${thumbnail}`}
-                  className={styles.thumbnailImage} />
+              {
+                `${thumbnail}` == "animation" ? 
+                  <div className = {styles.animationImage} ref={animationContainer}/> 
+                  :
+                  <img src={`${thumbnail}`} className={styles.thumbnailImage} />
+              }
+
               </Link>
               <Link href={`/posts/${id}`} legacyBehavior>
                 <a className={utilStyle.boldText}>{title}</a>

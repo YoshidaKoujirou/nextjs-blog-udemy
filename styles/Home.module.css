@@ -21,7 +21,20 @@
   cursor: pointer;
 }
 
+.animationImage {
+  height: 400px;
+  margin-bottom: 20px;
+  box-shadow: 4px 5px 12px black;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
 .thumbnailImage:hover {
+  transform: translate(4px, 5px);
+  box-shadow: none;
+}
+
+.animationImage:hover {
   transform: translate(4px, 5px);
   box-shadow: none;
 }
